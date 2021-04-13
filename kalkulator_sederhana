@@ -1,0 +1,185 @@
+package kalkulator2;
+
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
+public class kalkulator_ui implements ActionListener{
+ JFrame frame = new JFrame("Kalkulator");
+ JPanel panel = new JPanel( new FlowLayout());
+ JTextArea text = new JTextArea(1,20);
+ 
+ JButton tombol1 = new JButton("1");
+ JButton tombol2 = new JButton("2");
+ JButton tombol3 = new JButton("3");
+ JButton tombol4 = new JButton("4");
+ JButton tombol5 = new JButton("5");
+ JButton tombol6 = new JButton("6");
+ JButton tombol7 = new JButton("7");
+ JButton tombol8 = new JButton("8");
+ JButton tombol9 = new JButton("9");
+ JButton tombol0 = new JButton("0");
+ 
+ JButton tomboltambah = new JButton("+");
+ JButton tombolkurang = new JButton("-");
+ JButton tombolkali = new JButton("*");
+ JButton tombolbagi = new JButton("/");
+ JButton tombolsamadengan = new JButton("=");
+ JButton tombolclear = new JButton("C");
+ 
+ Double angkapertama, angkakedua,hasil;
+ int tambahc=0, kurangc=0, kalic=0, bagic=0;
+ 
+ public void UI() {
+	 frame.setVisible(true);
+	 frame.setSize(300, 290);
+	 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	 
+	 frame.add(panel);
+	 panel.add(text);
+	 
+	 panel.add(tombol1);
+	 panel.add(tombol2);
+	 panel.add(tombol3);
+	 panel.add(tombol4);
+	 panel.add(tombol5);
+	 panel.add(tombol6);
+	 panel.add(tombol7);
+	 panel.add(tombol8);
+	 panel.add(tombol9);
+	 panel.add(tombol0);
+	 
+	 panel.add(tomboltambah);
+	 panel.add(tombolkurang);
+	 panel.add(tombolkali);
+	 panel.add(tombolbagi);
+	 panel.add(tombolsamadengan);
+	 panel.add(tombolclear);
+	 
+	 tombol1.addActionListener(this);
+	 tombol2.addActionListener(this);
+	 tombol3.addActionListener(this);
+	 tombol4.addActionListener(this);
+	 tombol5.addActionListener(this);
+	 tombol6.addActionListener(this);
+	 tombol7.addActionListener(this);
+	 tombol8.addActionListener(this);
+	 tombol9.addActionListener(this);
+	 tombol0.addActionListener(this);
+	 
+	 tomboltambah.addActionListener(this);
+	 tombolkurang.addActionListener(this);
+	 tombolkali.addActionListener(this);
+	 tombolbagi.addActionListener(this);
+	 tombolsamadengan.addActionListener(this);
+	 tombolclear.addActionListener(this);
+ }
+
+@Override
+public void actionPerformed(ActionEvent e) {
+	Object source = e.getSource();
+	
+	if(source == tombolclear) {
+		angkapertama =0.0;
+		angkakedua = 0.0;
+		text.setText("");
+	}
+	
+	if(source == tombol1) {
+		text.append("1");
+	}
+	if(source == tombol2) {
+		text.append("2");
+	}
+	if(source == tombol3) {
+		text.append("3");
+	}
+	if(source == tombol4) {
+		text.append("4");
+	}
+	if(source == tombol5) {
+		text.append("5");
+	}
+	if(source == tombol6) {
+		text.append("6");
+	}
+	if(source == tombol7) {
+		text.append("7");
+	}
+	if(source == tombol8) {
+		text.append("8");
+	}
+	if(source == tombol9) {
+		text.append("9");
+	}
+	if(source == tombol0) {
+		text.append("0");
+	}
+	if(source == tomboltambah) {
+		angkapertama = numberReader();
+		text.setText("");
+		tambahc = 1;
+		kurangc = 0;
+		kalic = 0;
+		bagic = 0;
+	}
+	if(source == tombolkurang) {
+		angkapertama = numberReader();
+		text.setText("");
+		tambahc = 0;
+		kurangc = 1;
+		kalic = 0;
+		bagic = 0;
+	}
+	if(source == tombolkali) {
+		angkapertama = numberReader();
+		text.setText("");
+		tambahc = 0;
+		kurangc = 0;
+		kalic = 1;
+		bagic = 0;
+	}
+	if(source == tombolbagi) {
+		angkapertama = numberReader();
+		text.setText("");
+		tambahc = 0;
+		kurangc = 0;
+		kalic = 0;
+		bagic = 1;
+	}
+	if(source == tombolsamadengan) {
+		angkakedua = numberReader();
+		if (tambahc>0) {
+			hasil = angkapertama + angkakedua;
+			text.setText(Double.toString(hasil));
+		}
+		if (kurangc>0) {
+			hasil = angkapertama - angkakedua;
+			text.setText(Double.toString(hasil));
+		}
+		if (kalic>0) {
+			hasil = angkapertama * angkakedua;
+			text.setText(Double.toString(hasil));
+		}
+		if (bagic>0) {
+			hasil = angkapertama / angkakedua;
+			text.setText(Double.toString(hasil));
+		}
+	}
+	
+}
+
+public double numberReader() {
+	Double angkapertama;
+	String n;
+	n=text.getText();
+	angkapertama=Double.valueOf(n);
+	return angkapertama;
+}
+
+}
